@@ -1,0 +1,77 @@
+---
+title: "biyoinformatik"
+output: html_document
+date: '2022-05-19'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library("ape")
+```
+
+```{r}
+homosapiens <- read.GenBank("NM_003381.4", as.character = "TRUE")
+pongoapelii <- read.GenBank("XM_024248829.1", as.character = "TRUE")
+equuscaballus <- read.GenBank("XM_023633005.1", as.character = "TRUE")
+lutralutra <- read.GenBank("XM_047733983.1", as.character = "TRUE")
+caviaporcellus <- read.GenBank("XM_005003122.3", as.character = "TRUE")
+
+```
+
+```{r}
+seq1 = paste(homosapiens, collapse="")
+seq2 = paste(pongoapelii, collapse="")
+seq3 = paste(equuscaballus, collapse="")
+seq4 = paste(lutralutra, collapse="")
+seq5 = paste(caviaporcellus, collapse="")
+```
+
+```{r}
+library("Biostrings")
+```
+
+```{r}
+a1<-pairwiseAlignment(pattern=seq1, subject=seq2, type="local")
+a1
+
+a1.1<-pairwiseAlignment(pattern = seq1, subject = seq2, type="global")
+a1.1
+```
+
+```{r}
+a2<-pairwiseAlignment(pattern = seq1, subject = seq3, type="local")
+a2
+
+a2.1<-pairwiseAlignment(pattern = seq1, subject = seq3, type="global")
+a2.1
+```
+
+```{r}
+a3<-pairwiseAlignment(pattern = seq1, subject = seq4, type="local")
+a3
+
+a3.1<-pairwiseAlignment(pattern = seq1, subject = seq4, type="global")
+a3.1
+```
+
+```{r}
+a4<- pairwiseAlignment(pattern = seq1, subject = seq5, type="local")
+a4
+
+a4.1<- pairwiseAlignment(pattern = seq1, subject = seq5, type="global")
+a4.1
+```
+
+```{r}
+#Hizalama skorlarına baktığımızda en çok benzeyen canlılar: Homo sapiens- Pongo apelli
+#Dizilimları en farklı canlılar ise: Homo sapiens- Cavia Porcellus'dur. 
+```
