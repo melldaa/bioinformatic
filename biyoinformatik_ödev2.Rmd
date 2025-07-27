@@ -8,26 +8,22 @@ date: '2022-05-19'
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
 ```{r}
+# Load required library
 library("ape")
 ```
 
 ```{r}
+# Download gene sequences from GenBank (NCBI) for 5 species
 homosapiens <- read.GenBank("NM_003381.4", as.character = "TRUE")
 pongoapelii <- read.GenBank("XM_024248829.1", as.character = "TRUE")
 equuscaballus <- read.GenBank("XM_023633005.1", as.character = "TRUE")
 lutralutra <- read.GenBank("XM_047733983.1", as.character = "TRUE")
 caviaporcellus <- read.GenBank("XM_005003122.3", as.character = "TRUE")
-
 ```
 
 ```{r}
+# Convert sequences to single-character strings
 seq1 = paste(homosapiens, collapse="")
 seq2 = paste(pongoapelii, collapse="")
 seq3 = paste(equuscaballus, collapse="")
@@ -36,10 +32,12 @@ seq5 = paste(caviaporcellus, collapse="")
 ```
 
 ```{r}
+# Load Biostrings for sequence alignment
 library("Biostrings")
 ```
 
 ```{r}
+# Pairwise alignments: Homo sapiens vs Pongo abelii
 a1<-pairwiseAlignment(pattern=seq1, subject=seq2, type="local")
 a1
 
@@ -48,6 +46,7 @@ a1.1
 ```
 
 ```{r}
+# Homo sapiens vs Equus caballus
 a2<-pairwiseAlignment(pattern = seq1, subject = seq3, type="local")
 a2
 
@@ -56,6 +55,7 @@ a2.1
 ```
 
 ```{r}
+# Homo sapiens vs Lutra lutra
 a3<-pairwiseAlignment(pattern = seq1, subject = seq4, type="local")
 a3
 
@@ -64,6 +64,7 @@ a3.1
 ```
 
 ```{r}
+# Homo sapiens vs Cavia porcellus
 a4<- pairwiseAlignment(pattern = seq1, subject = seq5, type="local")
 a4
 
@@ -72,6 +73,8 @@ a4.1
 ```
 
 ```{r}
-#Hizalama skorlarına baktığımızda en çok benzeyen canlılar: Homo sapiens- Pongo apelli
-#Dizilimları en farklı canlılar ise: Homo sapiens- Cavia Porcellus'dur. 
+# Interpretation:
+# Based on the alignment scores:
+# - The most similar species to Homo sapiens is Pongo abelii (orangutan).
+# - The most different species in sequence is Cavia porcellus (guinea pig).
 ```
